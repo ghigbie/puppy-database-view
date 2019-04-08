@@ -36,14 +36,14 @@ def index():
     return render_template('home.html')
 
 @app.route('/add', methods=['GET', 'POST'])
-def app_pup():
+def add_pup():
     form = AddForm()
     if form.validate_on_submit():
         name = form.name.data()
         new_pup = Puppy(name)
         db.session.add(new_pup)
         db.session.commit()
-        return redirect(url_for('list_pup'))
+        return redirect(url_for('list'))
     return render_template('add.html', form=form)
 
 
