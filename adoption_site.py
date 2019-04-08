@@ -1,5 +1,5 @@
 import os
-#from forms import AddForm, DeleteForm
+from forms import AddForm, DeleteForm
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -37,4 +37,11 @@ def index():
 
 @app.route('/add', methods=['GET', 'POST'])
 def app_pup():
-    pass
+    form = AddForm()
+    if form.validate_on_submit():
+        name = form.name.data()
+        new_pup = Puppy(name)
+        db.session.add(new_pup)
+        db.session.commit()
+        return redirect(url_for('list_pup'))
+    return render_template('add.html', form=form)
