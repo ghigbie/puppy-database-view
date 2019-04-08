@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] == 'youwillneverguessme'
 
 ###SQL DATABASE SECTION #######
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///'+ os.path.join(basedir, 'data.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -27,7 +27,7 @@ class Puppy(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f"Puppy name: {self.name}"
+        return f"Puppy name: {self.name}."
 
 ####VIEWS#####
 
