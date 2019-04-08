@@ -45,3 +45,25 @@ def app_pup():
         db.session.commit()
         return redirect(url_for('list_pup'))
     return render_template('add.html', form=form)
+
+
+@app.route('/list')
+def list_pup():
+    puppies = Puppy.query.all()
+    return render_template('list.html', puppies=puppies)
+
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete_pup():
+    form = DeleteForm()
+    if form.validate_on_submit():
+        id = form.id.data
+        puppy_to_remove = Puppy.query.get(id)
+        db.session.delete(puppy_to_remove)
+        db.session.commit()
+        return redirect(url_for('list'))
+    return render_template('delete.html', form=form)
+    
+
+    if __name__ == '__main__':
+        app.run(debug=True)
