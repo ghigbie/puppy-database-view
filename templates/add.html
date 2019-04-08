@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block content %}
 <h1>Have a puppy that needs a home?</h1>
 <p>Add a puppy below: </p>
 <form method="POST">
@@ -7,3 +7,4 @@
     {{ form.name.label }}{{ form.name() }}
     {{ form.submit() }}
 </form>
+{% endblock %} 
