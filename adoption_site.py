@@ -25,6 +25,8 @@ class Puppy(db.Model):
     __tablename__ = 'puppies'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
+    owner = db.relationship('Owner', backref='puppy', uselist=False)
+
 
     def __init__(self, name):
         self.name = name
@@ -36,7 +38,7 @@ class Owner(db.model):
     __tablename__ = 'owners'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
-    pup_id = db.Column(db.Integer, foreign_key=True)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
 
     def __init__(self, name):
         self.name = name
