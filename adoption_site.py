@@ -32,6 +32,17 @@ class Puppy(db.Model):
     def __repr__(self):
         return f"Puppy name: {self.name}, Puppy ID: {self.id}"
 
+class Owner(db.model):
+    __tablename__ = 'owners'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    pup_id = db.Column(db.Integer, foreign_key=True)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return f"Owner of this puppy is {self.name}"
 
 ####VIEWS#####
 
