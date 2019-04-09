@@ -38,10 +38,14 @@ class Puppy(db.Model):
         else:
             return f"Puppy name is {self.name} and has no owner yet!"
 
+
 class Owner(db.Model):
+
     __tablename__ = 'owners'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
+    # We use puppies.id because __tablename__='puppies'
     puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
 
     def __init__(self, name, puppy_id):
@@ -49,7 +53,7 @@ class Owner(db.Model):
         self.puppy_id = puppy_id
 
     def __repr__(self):
-        return f"Owner of this puppy is {self.name}"
+        return f"Owner Name: {self.name}"
 
 ####VIEWS#####
 
@@ -67,7 +71,7 @@ def add_owner():
         db.session.add(new_owner)
         db.session.commit()
         return redirect(url_for('list_pup'))
-    return render_template('addowner.html')
+    return render_template('add_owner.html', form=form)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_pup():
