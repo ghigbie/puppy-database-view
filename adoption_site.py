@@ -62,14 +62,19 @@ def index():
 
 @app.route('/add_owner', methods=['GET', 'POST'])
 def add_owner():
+
     form = AddOwnerForm()
+
     if form.validate_on_submit():
         name = form.name.data
         pup_id = form.pup_id.data
+        # Add new owner to database
         new_owner = Owner(name, pup_id)
         db.session.add(new_owner)
         db.session.commit()
+
         return redirect(url_for('list_pup'))
+
     return render_template('add_owner.html', form=form)
 
 @app.route('/add', methods=['GET', 'POST'])
