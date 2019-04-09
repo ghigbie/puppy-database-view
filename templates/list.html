@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Here is a list of all available puppies:</h1>
+<ul>
+    {% for puppy in puppies %}
+    <li>{{ puppy }}</li>
+    {% endif %}
+</ul>
 {% endblock %}
