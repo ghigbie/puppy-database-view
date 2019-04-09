@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Got a puppy adopted?</h1>
+<p>Enter his id below to remove him:</p>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.id.label }}{{ form.id() }}
+    {{ form.submit() }}
+</form>
+
+{% endblock %}
