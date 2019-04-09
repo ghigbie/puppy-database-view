@@ -32,7 +32,10 @@ class Puppy(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f"Puppy name: {self.name}, Puppy ID: {self.id}"
+        if self.owner:
+            return f"Puppy name is {self.name} and the owner is {self.owner}"
+        else:
+            return f"Puppy name is {self.name} and has no owner yet!"
 
 class Owner(db.model):
     __tablename__ = 'owners'
@@ -40,8 +43,9 @@ class Owner(db.model):
     name = db.Column(db.Text)
     puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
 
-    def __init__(self, name):
+    def __init__(self, name, puppy_id):
         self.name = name
+        self.puppy_id = puppy_id
 
     def __repr__(self):
         return f"Owner of this puppy is {self.name}"
