@@ -39,7 +39,7 @@ def index():
 def add_pup():
     form = AddForm()
     if form.validate_on_submit():
-        name = form.name.data()
+        name = form.name.data
         new_pup = Puppy(name)
         db.session.add(new_pup)
         db.session.commit()
