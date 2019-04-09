@@ -11,7 +11,8 @@ app.config['SECRET_KEY'] = 'mysecretkey'
 # SQL DATABASE AND MODELS
 ##########################################
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -37,7 +38,7 @@ class Puppy(db.Model):
         else:
             return f"Puppy name is {self.name} and has no owner yet!"
 
-class Owner(db.model):
+class Owner(db.Model):
     __tablename__ = 'owners'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
@@ -64,7 +65,7 @@ def add_pup():
         new_pup = Puppy(name)
         db.session.add(new_pup)
         db.session.commit()
-        return redirect(url_for('list'))
+        return redirect(url_for('list_pup'))
     return render_template('add.html', form=form)
 
 
@@ -82,7 +83,7 @@ def delete_pup():
         puppy_to_remove = Puppy.query.get(id)
         db.session.delete(puppy_to_remove)
         db.session.commit()
-        return redirect(url_for('list'))
+        return redirect(url_for('list_pup'))
     return render_template('delete.html', form=form)
     
 
