@@ -28,15 +28,14 @@ class Puppy(db.Model):
     name = db.Column(db.Text)
     owner = db.relationship('Owner', backref='puppy', uselist=False)
 
-
     def __init__(self, name):
         self.name = name
 
     def __repr__(self):
         if self.owner:
-            return f"Puppy name is {self.name} and the owner is {self.owner}"
+            return f"Puppy name is {self.name} and owner is {self.owner.name}"
         else:
-            return f"Puppy name is {self.name} and has no owner yet!"
+            return f"Puppy name is {self.name} and has no owner assigned yet."
 
 
 class Owner(db.Model):
