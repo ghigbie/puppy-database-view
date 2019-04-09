@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] == 'youwillneverguessme'
+app.config['SECRET_KEY'] = 'youwillneverguessme'
 
 
 ###SQL DATABASE SECTION #######
