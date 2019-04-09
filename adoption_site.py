@@ -1,5 +1,5 @@
 import os
-from forms import AddForm, DeleteForm
+from forms import AddForm, DeleteForm, AddOwnerForm
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -56,6 +56,14 @@ class Owner(db.Model):
 @app.route('/')
 def index():
     return render_template('home.html')
+
+@app.route('/add_owner', methods=['GET', 'POST'])
+def addowner():
+    form = AddOwner()
+    if form.validate_on_submit():
+        name = form.name.data
+        puppy = 
+    return render_template('addowner.html')
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_pup():
