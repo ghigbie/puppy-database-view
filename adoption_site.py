@@ -58,7 +58,7 @@ def index():
     return render_template('home.html')
 
 @app.route('/add_owner', methods=['GET', 'POST'])
-def addowner():
+def add_owner():
     form = AddOwnerForm()
     if form.validate_on_submit():
         name = form.name.data
